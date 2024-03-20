@@ -5,6 +5,7 @@ export default function InfoList({
   children,
   gridStyle,
   backgroundColor,
+  displayCards
 }) {
   const standartList = (
     <div style={gridStyle}>
@@ -13,8 +14,8 @@ export default function InfoList({
       ))}
     </div>
   );
-  console.log(data);
-  const sortData = data.sort((a, b) => {
+  const copyData = JSON.parse(JSON.stringify(data))
+  const sortData = copyData.sort((a, b) => {
     if (a.description < b.description) {
       return -1;
     }
@@ -23,7 +24,6 @@ export default function InfoList({
     }
     return 0;
   });
-  console.log(sortData);
   const sortList = (
     <div style={gridStyle}>
       {sortData.map((dataElem) => (
@@ -32,12 +32,11 @@ export default function InfoList({
     </div>
   );
 
-  const handleChangeList = () => {};
-
+  console.log(displayCards);
   return (
     <div>
       {children && children}
-      {standartList}
+      {displayCards ? sortList : standartList}
       {/* {sortList} */}
     </div>
   );

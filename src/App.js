@@ -1,3 +1,6 @@
+import { useState } from "react";
+
+
 // список услуг для отображения в разных Section
 import Section from "./components/sections/Section";
 import InfoBlock from "./components/info-block/InfoBlock";
@@ -53,6 +56,13 @@ const bgPort = {
 };
 
 function App() {
+  const [data, setData] = useState();
+
+  const sortCards = (data) => {
+    setData(data)
+  }
+  // console.log(data);
+
   return (
     <div>
       <Section gridStyle={{ ...grid, ...bgPort }}>
@@ -73,8 +83,8 @@ function App() {
         >
           <LinksList />
         </InfoBlock>
-        <InfoList data={services} gridStyle={grid} backgroundColor="#8C78EE">
-          <SortCards />
+        <InfoList data={services} gridStyle={grid} backgroundColor="#8C78EE" displayCards={data}>
+          <SortCards onSortCards={sortCards} />
         </InfoList>
       </Section>
     </div>
